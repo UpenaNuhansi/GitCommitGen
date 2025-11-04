@@ -1,0 +1,12 @@
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+
+# User Secrets
+.microsoft/usersecrets/
+
+# Visual Studio Code cache files
+.vscode/
+
+# Package files
+*.nupkg
