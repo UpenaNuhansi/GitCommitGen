@@ -12,7 +12,7 @@ jobs:
     
     # Define environment variables needed for the workflow
     env:
-      PROJECT_PATH: GitCommitGen/GitCommitGen.csproj
+      PROJECT_PATH: GitCommitGen.csproj
 
     steps:
       - name:  Checkout Code
