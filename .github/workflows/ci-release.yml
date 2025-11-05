@@ -31,6 +31,31 @@ jobs:
         
       - name:  Build Project
         run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
+
+      # ----------------------------------------
+      # --- STEPS FOR REPORT GENERATION ---
+      # ----------------------------------------
+        
+      - name:  Run Tests & Collect Coverage
+        # Executes tests and generates the coverage file (coverage.cobertura.xml)
+        run: |
+          dotnet test GitCommitGen.Tests/GitCommitGen.Tests.csproj \
+            --configuration Release \
+            --no-build \
+            /p:CollectCoverage=true \
+            /p:CoverletOutput=./coverage/ \
+            /p:CoverletOutputFormat=cobertura
+            
+      - name:  Generate HTML Coverage Report
+        # Uses ReportGenerator tool to convert XML into HTML
+        run: |
+          dotnet tool install -g dotnet-reportgenerator-globaltool
+          reportgenerator \
+            -reports:coverage/coverage.cobertura.xml \
+            -targetdir:./coverage/html_report \
+            -reporttypes:Html
+        
+      # ----------------------------------------  
         
       - name:  Pack NuGet Tool
         # The 'dotnet pack' command creates the .nupkg file
@@ -55,6 +80,8 @@ jobs:
           name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-          files: nuget_packages/*.nupkg
+          files: |
+            nuget_packages/*.nupkg
+            coverage/html_report/index.html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
