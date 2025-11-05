@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     
     # Define environment variables needed for the workflow
+    permissions:
+      contents: write # Required for creating releases
+
     env:
       PROJECT_PATH: GitCommitGen.csproj
 
