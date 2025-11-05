@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>191fd02d-42be-46e2-a7d2-789a1e508e9a</UserSecretsId>
+    <Version>1.0.0</Version>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>aicommit</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
