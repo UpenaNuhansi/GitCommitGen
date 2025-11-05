@@ -16,6 +16,7 @@ jobs:
 
     env:
       PROJECT_PATH: GitCommitGen.csproj
+      TEST_PROJECT_PATH: GitCommitGen.Tests/GitCommitGen.Tests.csproj 
 
     steps:
       - name:  Checkout Code
@@ -26,11 +27,19 @@ jobs:
         with:
           dotnet-version: '8.0.x'
           
-      - name:  Restore Dependencies
-        run: dotnet restore ${{ env.PROJECT_PATH }}
+      - name:  Restore Dependencies (Main and Test Projects)
+        # Restore packages for BOTH the main project AND the test project.
+        run: |
+          dotnet restore ${{ env.PROJECT_PATH }}
+          dotnet restore ${{ env.TEST_PROJECT_PATH }}
         
-      - name:  Build Project
+      - name:  Build Main Project
+        # Explicitly build the main project (for the pack step later)
         run: dotnet build ${{ env.PROJECT_PATH }} --configuration Release --no-restore
+
+      - name:  Build Test Project
+        # Explicitly build the test project now, so it's ready for testing
+        run: dotnet build ${{ env.TEST_PROJECT_PATH }} --configuration Release --no-restore
 
       # ----------------------------------------
       # --- STEPS FOR REPORT GENERATION ---
