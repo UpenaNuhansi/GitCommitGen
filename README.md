@@ -91,7 +91,7 @@ feat: implement secure api key loading via user secrets
 
 ### 3. Commit
 
-Copy the suggested message and use it directly:
+Copy the suggested message and use it directly as the commit message:
 
 ```bash
 git commit -m "feat: implement secure api key loading via user secrets"
