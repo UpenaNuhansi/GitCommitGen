@@ -62,7 +62,7 @@ class Program
             Console.WriteLine("🤖 Generating commit message based on your diff...");
             Console.ResetColor();
             
-            // 5. Call the Gemini API
+            // 5. Call the Gemini API model
             var response = await client.Models.GenerateContentAsync(
                 model: "gemini-2.5-flash", 
                 contents: prompt            
